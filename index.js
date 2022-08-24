@@ -17,7 +17,7 @@ const typeDefs = gql`
     name: String!
     price: Float!
     discount: Float
-    discount_price: Float
+    discountPrice: Float
   }
 
   # Pontos de entrada da sua API!
@@ -37,12 +37,11 @@ const resolvers = {
     },
   },
   Product: {
-    discount_price(product) {
-      let final = 0;
-      if (product.discount != undefined && product.discount != null) {
-        final =  product.price * (product.discount / 100);
+    discountPrice(product) {
+      if (product.discount) {
+        return product.price * (1 - product.discount);
       }
-      return final;
+      return product.price;
     },
   },
   Query: {
@@ -69,8 +68,8 @@ const resolvers = {
     featuredProduct() {
       return {
         name: 'Ipad 13 pro',
-        price: 6746.7,
-        discount: 10,
+        price: 4890.86,
+        discount: 0.5,
       };
     },
   },
