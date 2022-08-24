@@ -16,7 +16,7 @@ const typeDefs = gql`
   type Product {
     name: String!
     price: Float!
-    discount: Float!
+    discount: Float
     discount_price: Float
   }
 
