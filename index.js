@@ -51,6 +51,7 @@ const typeDefs = gql`
     #retorna um array de elementos obrigatoriamente e os itens desse array é obrigatóriamente inteiros
     numerosMegaSena: [Int!]!
     users: [User]
+    usuarioPorId(id: ID): User
   }
 `;
 
@@ -107,6 +108,10 @@ const resolvers = {
     },
     users() {
       return users;
+    },
+    usuarioPorId(parent, args) {
+      const selecionados = users.filter((u) => u.id == args.id);
+      return selecionados ? selecionados[0] : null;
     },
   },
 };
