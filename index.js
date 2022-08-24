@@ -109,8 +109,8 @@ const resolvers = {
     users() {
       return users;
     },
-    usuarioPorId(parent, args) {
-      const selecionados = users.filter((u) => u.id === args.id);
+    usuarioPorId(parent, { id }) {
+      const selecionados = users.filter((u) => u.id === id);
       return selecionados ? selecionados[0] : null;
     },
   },
