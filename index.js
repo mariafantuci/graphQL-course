@@ -22,6 +22,11 @@ const typeDefs = gql`
 `;
 
 const resolvers = {
+  User: {
+    salary(user) {
+        return user.salary_real
+    }
+  },  
   Query: {
     ola() {
       return 'First exemple';
@@ -39,7 +44,7 @@ const resolvers = {
             name: 'Percy Jackson',
             email: 'percy-poseidon-son@gmail.com',
             age: 12,
-            salary: 6000.90,
+            salary_real: 6000.90,
             vip: true,
         }
     }
