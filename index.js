@@ -1,5 +1,26 @@
 const { ApolloServer, gql } = require('apollo-server');
 
+const users = [
+  {
+    id: 1,
+    name: 'João Batista',
+    email: 'jbsantos@gmail.com',
+    age: 29,
+  },
+  {
+    id: 2,
+    name: 'Rafael Junior',
+    email: 'rafajun@gmail.com',
+    age: 31,
+  },
+  {
+    id: 3,
+    name: 'Daniela Smith',
+    email: 'danismith@gmail.com',
+    age: 23,
+  },
+];
+
 const typeDefs = gql`
   scalar Date
 
@@ -29,6 +50,7 @@ const typeDefs = gql`
     featuredProduct: Product
     #retorna um array de elementos obrigatoriamente e os itens desse array é obrigatóriamente inteiros
     numerosMegaSena: [Int!]!
+    users: [User]
   }
 `;
 
@@ -82,6 +104,9 @@ const resolvers = {
           .map((n) => parseInt(Math.random() * 60 + 1))
           .sort(crescente)
       );
+    },
+    users() {
+      return users;
     },
   },
 };
