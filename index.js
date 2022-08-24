@@ -76,14 +76,20 @@ const resolvers = {
     },
     numerosMegaSena() {
       const crescente = (a, b) => a - b;
-      return Array(6)
-        .fill(0)
-        .map((n) => parseInt(Math.random() * 60 + 1))
-        .sort(crescente);
+      return removeDuplicates(
+        Array(6)
+          .fill(0)
+          .map((n) => parseInt(Math.random() * 60 + 1))
+          .sort(crescente)
+      );
     },
   },
 };
 
+function removeDuplicates(numbers) {
+  const newArray = [...new Set(numbers)];
+  return newArray;
+}
 const server = new ApolloServer({
   typeDefs,
   resolvers,
