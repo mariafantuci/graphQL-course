@@ -12,21 +12,39 @@ const typeDefs = gql`
     salary: Float
     vip: Boolean
   }
+
+  type Product {
+    name: String!
+    price: Float!
+    discount: Float!
+    discount_price: Float
+  }
+
   # Pontos de entrada da sua API!
   type Query {
     ola: String!
     currentTime: String!
     horaAtual: Date!
     logUser: User
+    featuredProduct: Product
   }
 `;
 
 const resolvers = {
   User: {
     salary(user) {
-        return user.salary_real
-    }
-  },  
+      return user.salary_real;
+    },
+  },
+  Product: {
+    discount_price(product) {
+      let final = 0;
+      if (product.discount != undefined && product.discount != null) {
+        final =  product.price * (product.discount / 100);
+      }
+      return final;
+    },
+  },
   Query: {
     ola() {
       return 'First exemple';
@@ -38,16 +56,23 @@ const resolvers = {
     horaAtual() {
       return new Date();
     },
-    logUser(){
-        return {
-            id: 1,
-            name: 'Percy Jackson',
-            email: 'percy-poseidon-son@gmail.com',
-            age: 12,
-            salary_real: 6000.90,
-            vip: true,
-        }
-    }
+    logUser() {
+      return {
+        id: 1,
+        name: 'Percy Jackson',
+        email: 'percy-poseidon-son@gmail.com',
+        age: 12,
+        salary_real: 6000.9,
+        vip: true,
+      };
+    },
+    featuredProduct() {
+      return {
+        name: 'Ipad 13 pro',
+        price: 6746.7,
+        discount: 10,
+      };
+    },
   },
 };
 
