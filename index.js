@@ -5,6 +5,7 @@ const typeDefs = gql`
   type Query {
     ola: String
     currentTime: String
+    horaAtual: String
   }
 `;
 
@@ -16,6 +17,9 @@ const resolvers = {
     currentTime() {
       const d = new Date();
       return `Current time, hour ${d.getHours()}:${d.getMinutes()}`;
+    },
+    horaAtual() {
+      return `${new Date()}`;
     }
   },
 };
