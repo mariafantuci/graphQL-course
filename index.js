@@ -27,6 +27,8 @@ const typeDefs = gql`
     horaAtual: Date!
     logUser: User
     featuredProduct: Product
+    #retorna um array de elementos obrigatoriamente e os itens desse array é obrigatóriamente inteiros
+    numerosMegaSena: [Int!]!
   }
 `;
 
@@ -71,6 +73,13 @@ const resolvers = {
         price: 4890.86,
         discount: 0.5,
       };
+    },
+    numerosMegaSena() {
+      const crescente = (a, b) => a - b;
+      return Array(6)
+        .fill(0)
+        .map((n) => parseInt(Math.random() * 60 + 1))
+        .sort(crescente);
     },
   },
 };
