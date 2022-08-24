@@ -25,7 +25,7 @@ const typeDefs = gql`
   scalar Date
 
   type User {
-    id: ID
+    id: Int
     # this ! means the return must be a string can't be null
     name: String!
     email: String!
@@ -51,7 +51,7 @@ const typeDefs = gql`
     #retorna um array de elementos obrigatoriamente e os itens desse array é obrigatóriamente inteiros
     numerosMegaSena: [Int!]!
     users: [User]
-    usuarioPorId(id: ID): User
+    usuarioPorId(id: Int): User
   }
 `;
 
@@ -110,7 +110,7 @@ const resolvers = {
       return users;
     },
     usuarioPorId(parent, args) {
-      const selecionados = users.filter((u) => u.id == args.id);
+      const selecionados = users.filter((u) => u.id === args.id);
       return selecionados ? selecionados[0] : null;
     },
   },
