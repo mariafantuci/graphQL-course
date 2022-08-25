@@ -21,6 +21,26 @@ const users = [
   },
 ];
 
+const perfis = [
+  {
+    id: 1,
+    name: 'Mariana ContaUmÉDoisÉTres',
+    type_number: 0,
+  },
+  {
+    id: 2,
+    name: 'Rafaela Crofty',
+    type_number: 1,
+  },
+  {
+    id: 3,
+    name: 'Daniela Smith',
+    type_number: 1,
+  },
+];
+
+const perfisType = ['Comum', 'Administrator'];
+
 const typeDefs = gql`
   scalar Date
 
@@ -32,6 +52,12 @@ const typeDefs = gql`
     age: Int
     salary: Float
     vip: Boolean
+  }
+
+  type Perfil {
+    id: Int
+    name: String!
+    type: String
   }
 
   type Product {
@@ -52,6 +78,9 @@ const typeDefs = gql`
     numerosMegaSena: [Int!]!
     users: [User]
     usuarioPorId(id: Int): User
+
+    perfis: [Perfil]
+    perfil(id: Int): [Perfil]
   }
 `;
 
@@ -67,6 +96,11 @@ const resolvers = {
         return product.price * (1 - product.discount);
       }
       return product.price;
+    },
+  },
+  Perfil: {
+    type(perfil) {
+      return perfisType[perfil.type_number];
     },
   },
   Query: {
@@ -112,6 +146,13 @@ const resolvers = {
     usuarioPorId(parent, { id }) {
       const selecionados = users.filter((u) => u.id === id);
       return selecionados ? selecionados[0] : null;
+    },
+    perfis() {
+      return perfis;
+    },
+    perfil(parent, { id }) {
+      const selected = perfis.filter((p) => p.id === id);
+      return selected ? selected : null;
     },
   },
 };
