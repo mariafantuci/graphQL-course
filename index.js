@@ -6,18 +6,21 @@ const users = [
     name: 'João Batista',
     email: 'jbsantos@gmail.com',
     age: 29,
+    perfil_id: 1,
   },
   {
     id: 2,
     name: 'Rafael Junior',
     email: 'rafajun@gmail.com',
     age: 31,
+    perfil_id: 2,
   },
   {
     id: 3,
     name: 'Daniela Smith',
     email: 'danismith@gmail.com',
     age: 23,
+    perfil_id: 1,
   },
 ];
 
@@ -43,6 +46,7 @@ const typeDefs = gql`
     age: Int
     salary: Float
     vip: Boolean
+    perfil: Perfil
   }
 
   type Perfil {
@@ -78,6 +82,10 @@ const resolvers = {
   User: {
     salary(user) {
       return user.salary_real;
+    },
+    perfil(user) {
+      const seletedPerfil = perfis.filter((p) => p.id === user.perfil_id);
+      return seletedPerfil ? seletedPerfil[0] : null;
     },
   },
   Product: {
