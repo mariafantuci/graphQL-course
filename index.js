@@ -24,22 +24,13 @@ const users = [
 const perfis = [
   {
     id: 1,
-    name: 'Mariana ContaUmÉDoisÉTres',
-    type_number: 0,
+    name: 'comum',
   },
   {
     id: 2,
-    name: 'Rafaela Crofty',
-    type_number: 1,
-  },
-  {
-    id: 3,
-    name: 'Daniela Smith',
-    type_number: 1,
+    name: 'administrador',
   },
 ];
-
-const perfisType = ['Comum', 'Administrator'];
 
 const typeDefs = gql`
   scalar Date
@@ -56,8 +47,7 @@ const typeDefs = gql`
 
   type Perfil {
     id: Int
-    name: String!
-    type: String
+    name: String
   }
 
   type Product {
@@ -96,11 +86,6 @@ const resolvers = {
         return product.price * (1 - product.discount);
       }
       return product.price;
-    },
-  },
-  Perfil: {
-    type(perfil) {
-      return perfisType[perfil.type_number];
     },
   },
   Query: {
@@ -150,7 +135,7 @@ const resolvers = {
     perfis() {
       return perfis;
     },
-    perfil(parent, { id }) {
+    perfil(_, { id }) {
       const selected = perfis.filter((p) => p.id === id);
       return selected ? selected : null;
     },
