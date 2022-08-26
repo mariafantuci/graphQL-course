@@ -34,3 +34,6 @@ query {
     
   }
 }
+
+# fragment
+é como se fossem mini funções para serem reaproveitadas, se comparadas ao banco de dados, seria como se fosse as procedures
