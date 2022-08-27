@@ -22,4 +22,15 @@ module.exports = {
     const excluidos = usuarios.splice(index, 1);
     return excluidos ? excluidos[0] : null;
   },
+
+  alterarUsuario(_, args) {
+    const index = usuarios.findIndex((user) => user.id === args.id);
+    if (index < 0) return null;
+    const usuario = {
+      ...usuarios[index],
+      ...args,
+    };
+    usuarios.splice(index, 1, usuario);
+    return usuario;
+  },
 };
