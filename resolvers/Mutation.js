@@ -16,4 +16,10 @@ module.exports = {
     usuarios.push(novo);
     return novo;
   },
+  excluirUsuario(_, { id }) {
+    const index = usuarios.findIndex((user) => user.id === id);
+    if (index < 0) return null;
+    const excluidos = usuarios.splice(index, 1);
+    return excluidos ? excluidos[0] : null;
+  },
 };
