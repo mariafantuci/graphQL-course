@@ -5,6 +5,7 @@ const users = [
     email: 'jbsantos@gmail.com',
     age: 29,
     perfil_id: 1,
+    status: 'ACTIVE',
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ const users = [
     email: 'rafajun@gmail.com',
     age: 31,
     perfil_id: 2,
+    status: 'INACTIVE',
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ const users = [
     email: 'danismith@gmail.com',
     age: 23,
     perfil_id: 1,
+    status: 'BLOCKED',
   },
 ];
 
