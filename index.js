@@ -1,4 +1,5 @@
 const { ApolloServer, gql } = require('apollo-server');
+const { importSchema } = require('graphql-import');
 
 const users = [
   {
@@ -34,49 +35,6 @@ const perfis = [
     name: 'administrador',
   },
 ];
-
-const typeDefs = gql`
-  scalar Date
-
-  type User {
-    id: Int
-    # this ! means the return must be a string can't be null
-    name: String!
-    email: String!
-    age: Int
-    salary: Float
-    vip: Boolean
-    perfil: Perfil
-  }
-
-  type Perfil {
-    id: Int
-    name: String
-  }
-
-  type Product {
-    name: String!
-    price: Float!
-    discount: Float
-    discountPrice: Float
-  }
-
-  # Pontos de entrada da sua API!
-  type Query {
-    ola: String!
-    currentTime: String!
-    horaAtual: Date!
-    logUser: User
-    featuredProduct: Product
-    #retorna um array de elementos obrigatoriamente e os itens desse array é obrigatóriamente inteiros
-    numerosMegaSena: [Int!]!
-    users: [User]
-    usuarioPorId(id: Int): User
-
-    perfis: [Perfil]
-    perfil(id: Int): [Perfil]
-  }
-`;
 
 const resolvers = {
   User: {
@@ -155,7 +113,7 @@ function removeDuplicates(numbers) {
   return newArray;
 }
 const server = new ApolloServer({
-  typeDefs,
+  typeDefs: importSchema('./schema/index.graphql'),
   resolvers,
 });
 

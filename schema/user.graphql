@@ -1,0 +1,16 @@
+
+type User {
+  id: Int
+  # this ! means the return must be a string can't be null
+  name: String!
+  email: String!
+  age: Int
+  salary: Float
+  vip: Boolean
+  perfil: Perfil
+}
+
+type Perfil {
+  id: Int
+  name: String
+}
