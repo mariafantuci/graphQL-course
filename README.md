@@ -43,3 +43,62 @@ id
 
 Comandos
 rs refaz o reload no servidor (npm start) quando não estiver monitorando
+
+
+# playground localhost:4000
+query {
+  ola
+  currentTime
+  horaAtual
+  logUser {
+   id
+  }
+  featuredProduct{
+   discountPrice
+  }
+  numerosMegaSena
+  users{
+    name
+  }
+  usuarioPorId(id: 3){
+    name
+    id
+    email
+  }
+  perfis{
+    id
+    name
+  }
+  perfil(id: 2){
+    name
+   id
+}
+  users {
+   name
+   id
+   email
+   perfil {
+     name
+      id
+    }
+  }
+  
+  usuarioPorId(id: 3){
+    ...usuarioCompleto
+  }
+  users{
+   ...usuarioCompleto
+  }
+}
+
+fragment usuarioCompleto on User {
+  id
+  name
+  age
+  salary
+  vip
+  perfil {
+    name
+    id
+  }
+}
