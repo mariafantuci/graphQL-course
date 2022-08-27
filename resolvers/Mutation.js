@@ -26,11 +26,17 @@ module.exports = {
   alterarUsuario(_, args) {
     const index = usuarios.findIndex((user) => user.id === args.id);
     if (index < 0) return null;
-    const usuario = {
-      ...usuarios[index],
-      ...args,
-    };
-    usuarios.splice(index, 1, usuario);
-    return usuario;
+
+    usuarios[index].nome = args.nome;
+    usuarios[index].email = args.email;
+    usuarios[index].idade = args.idade;
+
+    return usuarios[index];
+    // const usuario = {
+    //   ...usuarios[index],
+    //   ...args,
+    // };
+    // usuarios.splice(index, 1, usuario);
+    //return usuario;
   },
 };
