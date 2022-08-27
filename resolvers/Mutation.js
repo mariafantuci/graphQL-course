@@ -1,12 +1,15 @@
 const { usuarios, proximoId } = require('../data/db');
 
 module.exports = {
-  novoUsuario(_, { nome, email, idade }) {
+  //destruct{ nome, email, idade } from args
+  novoUsuario(_, args) {
+    const emailExiste = usuarios.some((users) => users.email === args.email);
+    if (emailExiste) {
+      throw new Error('Email already exists');
+    }
     const novo = {
       id: proximoId(),
-      nome,
-      email,
-      idade,
+      ...args,
       perfil_id: 1,
       status: 'ATIVO',
     };
