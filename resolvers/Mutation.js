@@ -29,7 +29,7 @@ module.exports = {
 
     usuarios[index].nome = args.nome;
     usuarios[index].email = args.email;
-    usuarios[index].idade = args.idade;
+    if (args.idade) usuarios[index].idade = args.idade;
 
     return usuarios[index];
     // const usuario = {
